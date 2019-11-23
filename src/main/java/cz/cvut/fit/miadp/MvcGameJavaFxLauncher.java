@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 import cz.cvut.fit.miadp.mvcgame.MvcGame;
+import cz.cvut.fit.miadp.mvcgame.bridge.GameGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.JavaFxGraphics;
 
 public class MvcGameJavaFxLauncher extends Application {
 
@@ -39,6 +42,7 @@ public class MvcGameJavaFxLauncher extends Application {
         root.getChildren().add( canvas );
             
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        IGameGraphics gr = new GameGraphics(new JavaFxGraphics(gc));
 
         ArrayList<String> pressedKeysCodes = new ArrayList<String>();
  
@@ -77,7 +81,7 @@ public class MvcGameJavaFxLauncher extends Application {
     
                 theMvcGame.processPressedKeys(pressedKeysCodes);
                 theMvcGame.update();
-                theMvcGame.render(gc);
+                theMvcGame.render(gr);
             }
         }.start();
             

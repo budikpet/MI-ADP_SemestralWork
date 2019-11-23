@@ -5,5 +5,5 @@ public interface IObservable
     void registerObserver(IObserver obs);
     void unregisterObserver(IObserver obs);
 
-    void notifyObservers();
+    void notifyMyObs();
 }

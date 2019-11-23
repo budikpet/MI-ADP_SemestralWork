@@ -1,35 +1,37 @@
 package cz.cvut.fit.miadp.mvcgame.controller;
 
-import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.command.MoveCannonUpCommand;
+import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 public class GameController {
+    private IGameModel model;
 
-    private GameModel model;
-
-    public GameController(GameModel model)
-    {
+	public GameController(IGameModel model) {
         this.model = model;
     }
-
-	public void handleKeyPress(String code) {
-
-        switch(code){
+    
+    public void handleKeyCode(String keyCode)
+    {
+        switch(keyCode){
             case "UP":
-                this.model.moveLogoUp();
+                // this.model.moveCannonUp();
+                this.model.registerCommand(new MoveCannonUpCommand(this.model));
                 break;
             case "DOWN":
-                this.model.moveLogoDown();
+                this.model.moveCannonDown();
                 break;
-            case "LEFT":
-                this.model.moveLogoLeft();
+            case "SPACE":
+                this.model.cannonShoot();
                 break;
-            case "RIGHT":
-                this.model.moveLogoRight();
+            case "M":
+                this.model.toggleShootingMode();
+                break;
+            case "Z":
+                this.model.undoLastCmd();
                 break;
             default: 
                 //nothing
         }
-
-	}
+    }
 
 }

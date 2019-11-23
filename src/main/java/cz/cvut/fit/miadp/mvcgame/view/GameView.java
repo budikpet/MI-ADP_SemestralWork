@@ -1,55 +1,58 @@
 package cz.cvut.fit.miadp.mvcgame.view;
 
+import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
-import cz.cvut.fit.miadp.mvcgame.model.Position;
+import cz.cvut.fit.miadp.mvcgame.model.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import cz.cvut.fit.miadp.mvcgame.proxy.GameModelProxy;
+import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
+import cz.cvut.fit.miadp.mvcgame.visitor.RenderingVisitor;
+
 
 public class GameView implements IObserver {
-
-	private GameModel model;	
-	private GraphicsContext gr;
-	private int updateCnt;
+    private GameModel model;
+    private IVisitor renderingVisitor;
+    private int updateCnt = 1;
+    private IGameGraphics gr;
 
 	public GameView(GameModel model) {
-		this.model = model;
-		
-		// this.model.setView(this);
-		this.model.registerObserver(this);
+        this.model = model;
+        
+        this.model.registerObserver(this);
 
-		this.updateCnt = 1;
-	}
-
-	public void setGraphics(GraphicsContext gr)
-	{
-		this.gr = gr;
-	}
+        this.renderingVisitor = new RenderingVisitor();
+    }
+    
+    public void setGraphics(IGameGraphics gr)
+    {
+        this.gr = gr;
+        this.renderingVisitor.setGraphics(gr);
+    }
 
 	public GameController makeController() {
-		return new GameController(this.model);
+		return new GameController(new GameModelProxy(model));
 	}
 
-	@Override
 	public void update() {
-		this.updateCnt++;
-	}
+        this.updateCnt++;
+    }
 
-	private void drawLogo(Position logoPos)
-	{
-		this.gr.drawImage(new Image("icons/fit-icon-256x256.png"), logoPos.getX(), logoPos.getY());
-	}
+    public void render() {
+        if(this.updateCnt > 0)
+        {
 
-	public void render() {
-		if(this.updateCnt > 0)
-		{
-			Position logoPos = this.model.getLogoPos();
-			this.drawLogo(logoPos);
+            // Clear the canvas
+            this.gr.clear();
+            
+            for(GameObject go : this.model.getGameObjects())
+            {
+                go.accept(this.renderingVisitor);
+            }
 
-			//
-			this.updateCnt = 0;
-		}
-	}
+            this.updateCnt = 0;
+        }
+    }
+    
 
 }
