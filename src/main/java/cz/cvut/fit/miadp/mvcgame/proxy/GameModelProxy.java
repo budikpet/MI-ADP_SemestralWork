@@ -36,6 +36,26 @@ public class GameModelProxy implements IGameModel {
     }
 
     @Override
+    public void aimUp() {
+        this.subject.aimUp();
+    }
+
+    @Override
+    public void aimDown() {
+        this.subject.aimDown();
+    }
+
+    @Override
+    public void incPower() {
+        this.subject.incPower();
+    }
+
+    @Override
+    public void decPower() {
+        this.subject.decPower();
+    }
+
+    @Override
     public void registerCommand(AbsCommand cmd) {
         this.subject.registerCommand(cmd);
     }

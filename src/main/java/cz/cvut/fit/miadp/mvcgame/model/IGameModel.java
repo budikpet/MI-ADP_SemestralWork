@@ -12,6 +12,14 @@ public interface IGameModel {
 
     void toggleShootingMode();
 
+    void aimUp();
+
+    void aimDown();
+
+    void incPower();
+
+    void decPower();
+
     void registerCommand(AbsCommand cmd);
 
     Object createMemento();

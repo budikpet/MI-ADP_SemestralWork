@@ -49,7 +49,7 @@ public class Cannon_A extends AbsCannon {
 	}
 
 	public void aimUp() {
-
+		
 	}
 
 	public void aimDown() {

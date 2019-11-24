@@ -114,6 +114,30 @@ public class GameModel implements IGameModel, IObservable {
         this.notifyMyObs();
     }
 
+    public void aimUp() {
+        this.cannon.aimUp();
+
+        this.notifyMyObs();
+    }
+
+    public void aimDown() {
+        this.cannon.aimDown();
+
+        this.notifyMyObs();
+    }
+
+    public void incPower() {
+        this.cannon.incPower();
+
+        this.notifyMyObs();
+    }
+
+    public void decPower() {
+        this.cannon.decPower();
+
+        this.notifyMyObs();
+    }
+
     // ================================================================================
     // Observers
     // ================================================================================
