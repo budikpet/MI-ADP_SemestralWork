@@ -23,7 +23,7 @@ public class Cannon_A extends AbsCannon {
 
 	public Cannon_A(IGameObjsFac goFact) {
 		this.setX(MvcGameConfig.CANNON_INIT_X);
-		this.setX((int) (MvcGameConfig.MAX_Y / 2));
+		this.setY((int) (MvcGameConfig.MAX_Y / 2));
 		this.goFact = goFact;
 
 		this.SINGLE_SHOOTING_MODE = new SingleShootingMode();

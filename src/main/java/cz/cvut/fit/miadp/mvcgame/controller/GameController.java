@@ -1,6 +1,10 @@
 package cz.cvut.fit.miadp.mvcgame.controller;
 
+import cz.cvut.fit.miadp.mvcgame.command.CannonShootCommand;
+import cz.cvut.fit.miadp.mvcgame.command.MoveCannonDownCommand;
 import cz.cvut.fit.miadp.mvcgame.command.MoveCannonUpCommand;
+import cz.cvut.fit.miadp.mvcgame.command.ToggleShootingModeCommand;
+import cz.cvut.fit.miadp.mvcgame.command.UndoLastCommand;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 /**
@@ -22,16 +26,16 @@ public class GameController {
             this.model.registerCommand(new MoveCannonUpCommand(this.model));
             break;
         case "DOWN":
-            this.model.moveCannonDown();
+            this.model.registerCommand(new MoveCannonDownCommand(this.model));
             break;
         case "SPACE":
-            this.model.cannonShoot();
+            this.model.registerCommand(new CannonShootCommand(this.model));
             break;
         case "M":
-            this.model.toggleShootingMode();
+            this.model.registerCommand(new ToggleShootingModeCommand(this.model));
             break;
         case "Z":
-            this.model.undoLastCmd();
+            this.model.registerCommand(new UndoLastCommand(this.model));
             break;
         default:
             // nothing
