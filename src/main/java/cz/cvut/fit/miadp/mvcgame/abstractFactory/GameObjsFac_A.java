@@ -5,11 +5,12 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.*;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMoveStrategy;
 
+/**
+ * Concrete implementation of AbstractFactory.
+ */
 public class GameObjsFac_A implements IGameObjsFac {
 
     private IMovingStrategy activeMovingStrategy = new SimpleMoveStrategy();
-
-
 
     @Override
     public AbsCannon createCannon() {
@@ -28,7 +29,6 @@ public class GameObjsFac_A implements IGameObjsFac {
 
     @Override
     public AbsMissile createMissile() {
-        
         return new Missile_A(this.activeMovingStrategy);
     }
 

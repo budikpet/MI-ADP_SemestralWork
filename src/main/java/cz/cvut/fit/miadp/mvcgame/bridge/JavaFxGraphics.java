@@ -5,12 +5,17 @@ import cz.cvut.fit.miadp.mvcgame.model.Position;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * Part of Bridge pattern. Encapsulates JavaFx graphics so that it is the only
+ * class that deals with them directly.
+ * 
+ * Implements "interface" for all simple JavaFx graphics objects.
+ */
 public class JavaFxGraphics implements IGameGraphicsImplementor {
 
     protected GraphicsContext gc;
 
-    public JavaFxGraphics(GraphicsContext gc)
-    {
+    public JavaFxGraphics(GraphicsContext gc) {
         this.gc = gc;
     }
 
@@ -28,13 +33,11 @@ public class JavaFxGraphics implements IGameGraphicsImplementor {
     @Override
     public void drawLine(Position beginPos, Position endPos) {
         this.gc.strokeLine(beginPos.getX(), beginPos.getY(), endPos.getX(), endPos.getY());
-
     }
 
     @Override
     public void clear() {
         this.gc.clearRect(0, 0, MvcGameConfig.MAX_X, MvcGameConfig.MAX_Y);
-
     }
 
 }

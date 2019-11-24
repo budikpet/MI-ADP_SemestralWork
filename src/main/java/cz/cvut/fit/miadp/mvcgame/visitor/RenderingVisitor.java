@@ -7,28 +7,28 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
 
-
+/**
+ * Visitor which renderes game objects on the screen.
+ */
 public class RenderingVisitor implements IVisitor {
-
 
     private IGameGraphics gr;
 
-    public RenderingVisitor(){
+    public RenderingVisitor() {
     }
 
-    public void setGraphics(IGameGraphics gr)
-    {
+    public void setGraphics(IGameGraphics gr) {
         this.gr = gr;
     }
 
     @Override
     public void visitCannon(AbsCannon go) {
         this.drawCannon(go);
-
     }
 
     private void drawCannon(AbsCannon go) {
-        if(this.gr == null)  return;
+        if (this.gr == null)
+            return;
 
         this.gr.drawImage("images/cannon.png", go.getPosition());
     }
@@ -47,17 +47,15 @@ public class RenderingVisitor implements IVisitor {
 
     @Override
     public void visitMissile(AbsMissile go) {
-        if(this.gr == null)  return;
+        if (this.gr == null)
+            return;
 
         this.gr.drawImage("images/missile.png", go.getPosition());
-
     }
 
     @Override
     public void visitCollision(AbsCollision go) {
         // TODO Auto-generated method stub
-
     }
-
 
 }

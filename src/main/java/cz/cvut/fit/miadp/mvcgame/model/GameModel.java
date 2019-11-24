@@ -17,6 +17,12 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 
+/**
+ * MVC model.
+ * 
+ * Contains all active game objects, canon logic, registration and execution of
+ * commands.
+ */
 public class GameModel implements IGameModel, IObservable {
     private List<IObserver> myObs;
 
@@ -45,33 +51,13 @@ public class GameModel implements IGameModel, IObservable {
         this.collisions = new ArrayList<AbsCollision>();
     }
 
-    public void moveCannonUp() {
-        this.cannon.moveUp();
+    public void timeTick() {
 
-        this.notifyMyObs();
-    }
+        this.executeCmds();
 
-    public void moveCannonDown() {
-        this.cannon.moveDown();
+        this.moveMissiles();
 
-        this.notifyMyObs();
-    }
-
-    @Override
-    public void registerObserver(IObserver obs) {
-        this.myObs.add(obs);
-    }
-
-    @Override
-    public void unregisterObserver(IObserver obs) {
-        this.myObs.remove(obs);
-    }
-
-    @Override
-    public void notifyMyObs() {
-        for (IObserver obs : this.myObs) {
-            obs.update();
-        }
+        // this.destroyInvisibleGO();
     }
 
     public List<GameObject> getGameObjects() {
@@ -86,33 +72,18 @@ public class GameModel implements IGameModel, IObservable {
         return go;
     }
 
-    public void timeTick() {
+    // ================================================================================
+    // Game logic
+    // ================================================================================
 
-        this.executeCmds();
+    public void moveCannonUp() {
+        this.cannon.moveUp();
 
-        this.moveMissiles();
-
-        // this.destroyInvisibleGO();
+        this.notifyMyObs();
     }
 
-    private void executeCmds() {
-        while(!this.unexecutedCmds.isEmpty())
-        {
-            AbsCommand cmd = this.unexecutedCmds.poll();
-            cmd.doExecute();
-
-            this.executedCmds.push(cmd);
-        }
-
-        
-    }
-
-    public void undoLastCmd()
-    {
-        if(this.executedCmds.isEmpty()) return;
-
-        AbsCommand cmd = this.executedCmds.pop();
-        cmd.unexecute();
+    public void moveCannonDown() {
+        this.cannon.moveDown();
 
         this.notifyMyObs();
     }
@@ -137,6 +108,45 @@ public class GameModel implements IGameModel, IObservable {
         this.notifyMyObs();
     }
 
+    // ================================================================================
+    // Observers
+    // ================================================================================
+
+    @Override
+    public void registerObserver(IObserver obs) {
+        this.myObs.add(obs);
+    }
+
+    @Override
+    public void unregisterObserver(IObserver obs) {
+        this.myObs.remove(obs);
+    }
+
+    @Override
+    public void notifyMyObs() {
+        for (IObserver obs : this.myObs) {
+            obs.update();
+        }
+    }
+
+    // ================================================================================
+    // Commands and Memento
+    // ================================================================================
+
+    @Override
+    public void registerCommand(AbsCommand cmd) {
+        this.unexecutedCmds.add(cmd);
+    }
+
+    private void executeCmds() {
+        while (!this.unexecutedCmds.isEmpty()) {
+            AbsCommand cmd = this.unexecutedCmds.poll();
+            cmd.doExecute();
+
+            this.executedCmds.push(cmd);
+        }
+    }
+
     private class Memento {
         private int score;
     }
@@ -156,12 +166,14 @@ public class GameModel implements IGameModel, IObservable {
 
     }
 
-    @Override
-    public void registerCommand(AbsCommand cmd) {
-        this.unexecutedCmds.add(cmd);
+    public void undoLastCmd() {
+        if (this.executedCmds.isEmpty())
+            return;
 
+        AbsCommand cmd = this.executedCmds.pop();
+        cmd.unexecute();
+
+        this.notifyMyObs();
     }
-
-
 
 }

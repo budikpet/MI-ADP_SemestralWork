@@ -17,10 +17,9 @@ public class Cannon_A extends AbsCannon {
 
 	private IShootingMode SINGLE_SHOOTING_MODE;
 	private IShootingMode DOUBLE_SHOOTING_MODE;
-	
+
 	private IGameObjsFac goFact;
 	private List<AbsMissile> shootBatch;
-	
 
 	public Cannon_A(IGameObjsFac goFact) {
 		this.setX(MvcGameConfig.CANNON_INIT_X);
@@ -29,7 +28,7 @@ public class Cannon_A extends AbsCannon {
 
 		this.SINGLE_SHOOTING_MODE = new SingleShootingMode();
 		this.DOUBLE_SHOOTING_MODE = new DoubleShootingMode();
-		
+
 		this.setSingleShootingMode();
 	}
 
@@ -68,28 +67,24 @@ public class Cannon_A extends AbsCannon {
 	@Override
 	public void moveUp() {
 		this.move(0, -1 * MvcGameConfig.MOVE_STEP);
-
 	}
 
 	@Override
 	public void moveDown() {
 		this.move(0, MvcGameConfig.MOVE_STEP);
-
 	}
 
 	@Override
 	public List<AbsMissile> shoot() {
 
-		this.shootBatch =  new ArrayList<AbsMissile>();
+		this.shootBatch = new ArrayList<AbsMissile>();
 
 		this.mode.shoot(this);
 
-        return this.shootBatch;
-		
+		return this.shootBatch;
 	}
 
-	public AbsMissile primitiveShoot()
-	{
+	public AbsMissile primitiveShoot() {
 		AbsMissile m = this.goFact.createMissile();
 		m.setX(this.getX());
 		m.setY(this.getY());
@@ -101,21 +96,18 @@ public class Cannon_A extends AbsCannon {
 
 	@Override
 	public void toggleShootingMode() {
-		
-		this.mode.toggle(this);
 
+		this.mode.toggle(this);
 	}
 
 	@Override
 	public void setDoubleShootingMode() {
 		this.mode = this.DOUBLE_SHOOTING_MODE;
-
 	}
 
 	@Override
 	public void setSingleShootingMode() {
 		this.mode = this.SINGLE_SHOOTING_MODE;
-
 	}
 
 }

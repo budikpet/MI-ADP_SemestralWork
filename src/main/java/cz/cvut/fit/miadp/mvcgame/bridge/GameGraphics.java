@@ -2,25 +2,25 @@ package cz.cvut.fit.miadp.mvcgame.bridge;
 
 import cz.cvut.fit.miadp.mvcgame.model.Position;
 
-public class GameGraphics implements IGameGraphics
-{
+/**
+ * Part of bridge pattern. Implements "interface" for functionality that is
+ * needed in the game.
+ */
+public class GameGraphics implements IGameGraphics {
     protected IGameGraphicsImplementor implementor;
 
-    public GameGraphics(IGameGraphicsImplementor impl)
-    {
+    public GameGraphics(IGameGraphicsImplementor impl) {
         this.implementor = impl;
     }
 
     @Override
     public void drawImage(String path, Position pos) {
         this.implementor.drawImage(path, pos);
-
     }
 
     @Override
     public void drawText(String text, Position pos) {
         this.implementor.drawText(text, pos);
-
     }
 
     @Override
@@ -34,7 +34,6 @@ public class GameGraphics implements IGameGraphics
     @Override
     public void clear() {
         this.implementor.clear();
-
     }
 
 }

@@ -1,14 +1,10 @@
 package cz.cvut.fit.miadp.mvcgame.model.gameobjects;
 
 import java.util.List;
-
 import cz.cvut.fit.miadp.mvcgame.model.GameObject;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
-
-public abstract class AbsCannon extends GameObject
-{
-
+public abstract class AbsCannon extends GameObject {
 	public abstract Float getVelocity();
 	public abstract Float getAngle();
     
@@ -25,8 +21,7 @@ public abstract class AbsCannon extends GameObject
 	public abstract void incPower();
 	public abstract void decPower();
 
-	public void accept(IVisitor visitor)
-    {
+	public void accept(IVisitor visitor) {
         visitor.visitCannon(this);
 	}
 	
@@ -36,6 +31,4 @@ public abstract class AbsCannon extends GameObject
 	public abstract void toggleShootingMode();
 	public abstract void setDoubleShootingMode();
 	public abstract void setSingleShootingMode();
-
-
 }
