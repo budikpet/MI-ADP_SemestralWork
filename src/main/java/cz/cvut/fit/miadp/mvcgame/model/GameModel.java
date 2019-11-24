@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjsFac_A;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjsFac;
 import cz.cvut.fit.miadp.mvcgame.command.AbsCommand;
+import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
@@ -32,6 +33,7 @@ public class GameModel implements IGameModel, IObservable {
     private IGameObjsFac goFact = new GameObjsFac_A();
 
     private int score;
+    private long last_shot;
     private AbsCannon cannon;
     private AbsModelInfo gameInfo;
     private List<AbsEnemy> enemies;
@@ -40,6 +42,7 @@ public class GameModel implements IGameModel, IObservable {
 
     public GameModel() {
         this.score = 0;
+        this.last_shot = System.currentTimeMillis() - MvcGameConfig.RELOAD_MS;
 
         this.myObs = new ArrayList<IObserver>();
 
@@ -97,9 +100,12 @@ public class GameModel implements IGameModel, IObservable {
     }
 
     public void cannonShoot() {
-        this.missiles.addAll(this.cannon.shoot());
-
-        this.notifyMyObs();
+        long time = System.currentTimeMillis();
+        if(time >= this.last_shot) {
+            this.missiles.addAll(this.cannon.shoot());
+            this.last_shot = time + MvcGameConfig.RELOAD_MS;
+            this.notifyMyObs();
+        }
     }
 
     public void toggleShootingMode() {

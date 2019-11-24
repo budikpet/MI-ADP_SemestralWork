@@ -22,7 +22,6 @@ public class GameController {
     public void handleKeyCode(String keyCode) {
         switch (keyCode) {
         case "UP":
-            // this.model.moveCannonUp();
             this.model.registerCommand(new MoveCannonUpCommand(this.model));
             break;
         case "DOWN":
