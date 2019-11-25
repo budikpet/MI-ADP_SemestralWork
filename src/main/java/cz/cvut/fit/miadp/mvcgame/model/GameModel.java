@@ -55,18 +55,24 @@ public class GameModel implements IGameModel, IObservable {
         this.collisions = new ArrayList<AbsCollision>();
 
         // Randomly create enemies
-
-        for (int i = 0; i < MvcGameConfig.NUM_OF_ENEMIES; i++) {
-            this.enemies.add(this.goFact.createEnemy());
-        }
+        this.generateEnemies();
     }
 
     public void timeTick() {
+        this.generateEnemies();
         this.executeCmds();
         this.moveMissiles();
         this.handleCollisions();
 
         // this.destroyInvisibleGO();
+    }
+
+    private void generateEnemies() {
+        int enemiesCount = this.enemies.size();
+
+        for (int i = 0; i < MvcGameConfig.NUM_OF_ENEMIES - enemiesCount; i++) {
+            this.enemies.add(this.goFact.createEnemy());
+        }
     }
 
     private void handleCollisions() {
