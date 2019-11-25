@@ -44,6 +44,10 @@ public abstract class AbsCannon extends GameObject {
 		return this.mode;
 	}
 
+	public void setShootingMode(ShootingModes mode) {
+		this.mode = mode;
+	}
+
 	public double getPower() {
 		return this.power;
 	}

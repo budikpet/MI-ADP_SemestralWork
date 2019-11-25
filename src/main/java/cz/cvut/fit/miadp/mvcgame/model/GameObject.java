@@ -43,6 +43,10 @@ public abstract class GameObject {
         return new Position(this.pos);
     }
 
+    public void setPosition(Position pos) {
+        this.pos = pos;
+    }
+
     public int getX() {
         return this.pos.getX();
     }

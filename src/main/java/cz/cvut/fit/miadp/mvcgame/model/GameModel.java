@@ -17,6 +17,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsGameInfo;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
+import cz.cvut.fit.miadp.mvcgame.state.ShootingModes;
 
 /**
  * MVC model.
@@ -220,7 +221,8 @@ public class GameModel implements IGameModel, IObservable {
         public ArrayList<AbsEnemy> enemies;
         public ArrayList<AbsMissile> missiles;
         public ArrayList<AbsCollision> collisions;
-        public int cannonY;
+        public Position cannonPos;
+        public ShootingModes mode;
     }
 
     public Object createMemento() {
@@ -229,7 +231,8 @@ public class GameModel implements IGameModel, IObservable {
         memento.enemies = new ArrayList<AbsEnemy>(this.enemies);
         memento.missiles = new ArrayList<AbsMissile>(this.missiles);
         memento.collisions = new ArrayList<AbsCollision>(this.collisions);
-        memento.cannonY = this.cannon.getY();
+        memento.cannonPos = this.cannon.getPosition();
+        memento.mode = this.cannon.getShootingMode();
         return memento;
     }
 
@@ -239,7 +242,8 @@ public class GameModel implements IGameModel, IObservable {
         this.enemies = m.enemies;
         this.missiles = m.missiles;
         this.collisions = m.collisions;
-        this.cannon.setY(m.cannonY);
+        this.cannon.setPosition(m.cannonPos);
+        this.cannon.setShootingMode(m.mode);
         this.notifyMyObs();
     }
 
