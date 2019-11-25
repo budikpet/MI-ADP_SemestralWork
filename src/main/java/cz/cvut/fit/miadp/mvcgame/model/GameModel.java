@@ -83,6 +83,8 @@ public class GameModel implements IGameModel, IObservable {
                     // Mark missile and enemy for removal
                     deletedMissiles.add(currMissile);
                     deletedEnemies.add(currEnemy);
+
+                    break;
                 }
             }
         }

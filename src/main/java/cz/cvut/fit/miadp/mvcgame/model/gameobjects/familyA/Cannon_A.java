@@ -9,15 +9,10 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.state.DoubleShootingMode;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
+import cz.cvut.fit.miadp.mvcgame.state.ShootingModes;
 import cz.cvut.fit.miadp.mvcgame.state.SingleShootingMode;
 
 public class Cannon_A extends AbsCannon {
-
-	private IShootingMode mode;
-
-	private IShootingMode SINGLE_SHOOTING_MODE;
-	private IShootingMode DOUBLE_SHOOTING_MODE;
-
 	private IGameObjsFac goFact;
 	private List<AbsMissile> shootBatch;
 
@@ -27,11 +22,7 @@ public class Cannon_A extends AbsCannon {
 		this.setY((int) (MvcGameConfig.MAX_Y / 2));
 		this.goFact = goFact;
 
-		this.SINGLE_SHOOTING_MODE = new SingleShootingMode();
-		this.DOUBLE_SHOOTING_MODE = new DoubleShootingMode();
-
-		this.setSingleShootingMode();
-		this.setDoubleShootingMode();
+		this.mode = ShootingModes.SINGLE_SHOOT;
 	}
 
 	public void aimUp() {
@@ -69,7 +60,7 @@ public class Cannon_A extends AbsCannon {
 
 		this.shootBatch = new ArrayList<AbsMissile>();
 
-		this.mode.shoot(this);
+		this.mode.getMode().shoot(this);
 
 		return this.shootBatch;
 	}
@@ -81,26 +72,4 @@ public class Cannon_A extends AbsCannon {
 
 		return m;
 	}
-
-	@Override
-	public void toggleShootingMode() {
-		this.mode.toggle(this);
-	}
-
-	/**
-	 * Used for setting the mode from IShootingMode.
-	 */
-	@Override
-	public void setDoubleShootingMode() {
-		this.mode = this.DOUBLE_SHOOTING_MODE;
-	}
-
-	/**
-	 * Used for setting the mode from IShootingMode.
-	 */
-	@Override
-	public void setSingleShootingMode() {
-		this.mode = this.SINGLE_SHOOTING_MODE;
-	}
-
 }

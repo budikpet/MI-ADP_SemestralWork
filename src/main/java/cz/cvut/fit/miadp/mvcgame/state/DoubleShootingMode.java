@@ -5,6 +5,13 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 
 public class DoubleShootingMode implements IShootingMode {
+    private static DoubleShootingMode instance;
+
+    private DoubleShootingMode() {}
+
+    static {
+        instance = new DoubleShootingMode();
+    }
 
     @Override
     public void shoot(AbsCannon cannon) {
@@ -12,16 +19,10 @@ public class DoubleShootingMode implements IShootingMode {
             AbsMissile missile = cannon.primitiveShoot();
             missile.setOffsetY(-3 * i * MvcGameConfig.MOVE_STEP);
         }
-
-        
-        // missile.move(0, MvcGameConfig.MOVE_STEP);
-
-        // missile.move(0, -1 * MvcGameConfig.MOVE_STEP);
     }
 
-    @Override
-    public void toggle(AbsCannon cannon) {
-        cannon.setSingleShootingMode();
+    public static IShootingMode getInstance() {
+        return instance;
     }
 
 }

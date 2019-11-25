@@ -3,11 +3,13 @@ package cz.cvut.fit.miadp.mvcgame.model.gameobjects;
 import java.util.List;
 
 import cz.cvut.fit.miadp.mvcgame.model.GameObject;
+import cz.cvut.fit.miadp.mvcgame.state.ShootingModes;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
 public abstract class AbsCannon extends GameObject {
 	protected double angle;
 	protected double power;
+	protected ShootingModes mode;
 
 	public AbsCannon(double angle, double power) {
 		this.power = power;
@@ -26,12 +28,20 @@ public abstract class AbsCannon extends GameObject {
 	public abstract List<AbsMissile> shoot();
 	public abstract AbsMissile primitiveShoot();
 
-	public abstract void toggleShootingMode();
-	public abstract void setDoubleShootingMode();
-	public abstract void setSingleShootingMode();
-
 	public void accept(IVisitor visitor) {
         visitor.visitCannon(this);
+	}
+
+	public void toggleShootingMode() {
+		this.mode = this.mode.toggle();
+	}
+
+	// ================================================================================
+    // Getters/Setters
+    // ================================================================================
+
+	public ShootingModes getShootingMode() {
+		return this.mode;
 	}
 
 	public double getPower() {

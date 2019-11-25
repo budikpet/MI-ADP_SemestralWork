@@ -15,8 +15,6 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsGameInfo;
 public class RenderingVisitor implements IVisitor {
     private IGameGraphics gr;
 
-    private RenderingVisitor() {}
-
     public void setGraphics(IGameGraphics gr) {
         this.gr = gr;
     }
@@ -61,10 +59,6 @@ public class RenderingVisitor implements IVisitor {
     @Override
     public void visitCollision(AbsCollision go) {
         this.gr.drawImage("images/collision.png", go.getPosition());
-    }
-
-    public static RenderingVisitor getInstance() {
-        return new RenderingVisitor();
     }
 
 }

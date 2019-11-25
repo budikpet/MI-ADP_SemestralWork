@@ -13,9 +13,9 @@ public class GameInfo_A extends AbsGameInfo {
     public String getText() {
         AbsCannon cannon = model.getCannon();
         
-        return String.format("Score: %d; Cannon position: [%d, %d], angle: %f, power: %f; Missiles count: %d; Enemies count: %d",
+        return String.format("Score: %d; Cannon position: [%d, %d], angle: %f, power: %f, mode: %s; Missiles count: %d; Enemies count: %d",
             model.getScore(), 
-            cannon.getX(), cannon.getY(), cannon.getAngle(), cannon.getPower(), 
+            cannon.getX(), cannon.getY(), cannon.getAngle(), cannon.getPower(), cannon.getShootingMode().toString(),
             model.getMissilesCount(), model.getEnemiesCount()
         );
     }

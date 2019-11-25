@@ -6,11 +6,12 @@ import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
 public abstract class AbsGameInfo extends GameObject {
     protected IGameModel model;
-    public abstract String getText();
 
     public AbsGameInfo(IGameModel model) {
         this.model = model;
     }
+
+    public abstract String getText();
 
     public void accept(IVisitor visitor) {
         visitor.visitGameInfo(this);
