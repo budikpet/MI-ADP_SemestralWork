@@ -9,7 +9,7 @@ public class MvcGameConfig {
     public static final int CANNON_INIT_X = 10;
     public static final long RELOAD_MS = 500;
 
-    public static final double INIT_POWER = 10 / 20.0;
+    public static final double INIT_POWER = 10;
     public static final double INIT_ANGLE = 0.0;
     public static final double INIT_GRAVITY = 0.0001;
 
