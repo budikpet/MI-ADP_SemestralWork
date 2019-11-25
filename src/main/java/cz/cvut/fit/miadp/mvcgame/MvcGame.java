@@ -26,6 +26,9 @@ public class MvcGame {
         for (String code : pressedKeysCodes) {
             this.controller.handleKeyCode(code);
         }
+
+        // TODO: Remove
+        pressedKeysCodes.clear();
     }
 
     public void update() {

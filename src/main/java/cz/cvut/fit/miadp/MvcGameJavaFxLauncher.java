@@ -49,20 +49,29 @@ public class MvcGameJavaFxLauncher extends Application {
 
         ArrayList<String> pressedKeysCodes = new ArrayList<String>();
 
-        theScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
+        // theScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        //     public void handle(KeyEvent e) {
+        //         String code = e.getCode().toString();
 
-                // only add once... prevent duplicates
-                if (!pressedKeysCodes.contains(code))
-                    pressedKeysCodes.add(code);
-            }
-        });
+        //         // only add once... prevent duplicates
+        //         if (!pressedKeysCodes.contains(code))
+        //             pressedKeysCodes.add(code);
+        //     }
+        // });
+
+        // theScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        //     public void handle(KeyEvent e) {
+        //         String code = e.getCode().toString();
+        //         pressedKeysCodes.remove(code);
+        //     }
+        // });
+
+        //FIXME: Do properly with OnPressed and OnReleased
 
         theScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 String code = e.getCode().toString();
-                pressedKeysCodes.remove(code);
+                pressedKeysCodes.add(code);
             }
         });
 
