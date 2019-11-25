@@ -6,6 +6,8 @@ package cz.cvut.fit.miadp.mvcgame.config;
 public class MvcGameConfig {
     public static final int MAX_X = 1280;
     public static final int MAX_Y = 720;
+    public static final int INFO_X = 10;
+    public static final int INFO_Y = 20;
     public static final int CANNON_INIT_X = 10;
     public static final long RELOAD_MS = 500;
     public static final int NUM_OF_ENEMIES = 20;

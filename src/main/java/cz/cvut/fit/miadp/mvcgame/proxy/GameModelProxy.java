@@ -2,6 +2,7 @@ package cz.cvut.fit.miadp.mvcgame.proxy;
 
 import cz.cvut.fit.miadp.mvcgame.command.AbsCommand;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 
 /**
  * Acts as an intermediary between actual GameModel and GameController. For
@@ -73,6 +74,26 @@ public class GameModelProxy implements IGameModel {
     @Override
     public void undoLastCmd() {
         this.subject.undoLastCmd();
+    }
+
+    @Override
+    public AbsCannon getCannon() {
+        return this.subject.getCannon();
+    }
+
+    @Override
+    public int getScore() {
+        return this.subject.getScore();
+    }
+
+    @Override
+    public int getMissilesCount() {
+        return this.subject.getMissilesCount();
+    }
+
+    @Override
+    public int getEnemiesCount() {
+        return this.subject.getEnemiesCount();
     }
 
 }

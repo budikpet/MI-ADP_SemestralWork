@@ -3,16 +3,18 @@ package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 import java.util.Random;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsGameInfo;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Cannon_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Collision_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Enemy_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Missile_A;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.ModelInfo_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.GameInfo_A;
 import cz.cvut.fit.miadp.mvcgame.strategy.GravityMoveStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 
@@ -56,8 +58,8 @@ public class GameObjsFac_A implements IGameObjsFac {
     }
 
     @Override
-    public AbsModelInfo createModelInfo() {
-        return new ModelInfo_A();
+    public AbsGameInfo createGameInfo(IGameModel model) {
+        return new GameInfo_A(model);
     }
 
 }

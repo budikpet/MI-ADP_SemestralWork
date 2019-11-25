@@ -14,7 +14,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsGameInfo;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 
@@ -35,7 +35,7 @@ public class GameModel implements IGameModel, IObservable {
     private int score;
     private long last_shot;
     private AbsCannon cannon;
-    private AbsModelInfo gameInfo;
+    private AbsGameInfo gameInfo;
     private List<AbsEnemy> enemies;
     private List<AbsMissile> missiles;
     private List<AbsCollision> collisions;
@@ -47,7 +47,7 @@ public class GameModel implements IGameModel, IObservable {
         this.myObs = new ArrayList<IObserver>();
 
         this.cannon = this.goFact.createCannon();
-        this.gameInfo = this.goFact.createModelInfo();
+        this.gameInfo = this.goFact.createGameInfo(this);
 
         this.enemies = new ArrayList<AbsEnemy>();
         this.missiles = new ArrayList<AbsMissile>();
@@ -210,6 +210,26 @@ public class GameModel implements IGameModel, IObservable {
         cmd.unexecute();
 
         this.notifyMyObs();
+    }
+
+    // ================================================================================
+    // Getters/Setters
+    // ================================================================================
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public AbsCannon getCannon() {
+        return this.cannon;
+    }
+
+    public int getMissilesCount() {
+        return this.missiles.size();
+    }
+
+    public int getEnemiesCount() {
+        return this.enemies.size();
     }
 
 }

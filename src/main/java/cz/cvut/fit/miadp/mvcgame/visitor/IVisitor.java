@@ -11,7 +11,7 @@ public interface IVisitor {
 
     void visitEnemy(AbsEnemy go);
 
-    void visitGameInfo(AbsModelInfo go);
+    void visitGameInfo(AbsGameInfo go);
 
     void visitMissile(AbsMissile go);
 

@@ -1,11 +1,13 @@
 package cz.cvut.fit.miadp.mvcgame.visitor;
 
 import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
+import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsGameInfo;
 
 /**
  * Visitor which renderes game objects on the screen.
@@ -40,9 +42,12 @@ public class RenderingVisitor implements IVisitor {
     }
 
     @Override
-    public void visitGameInfo(AbsModelInfo go) {
-        // TODO Auto-generated method stub
-
+    public void visitGameInfo(AbsGameInfo go) {
+        if (this.gr == null) {
+            return;
+        }
+        
+        this.gr.drawText(go.getText(), new Position(MvcGameConfig.INFO_X, MvcGameConfig.INFO_Y));
     }
 
     @Override

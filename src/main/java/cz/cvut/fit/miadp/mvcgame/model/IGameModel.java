@@ -1,6 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.model;
 
 import cz.cvut.fit.miadp.mvcgame.command.AbsCommand;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 
 public interface IGameModel {
 
@@ -27,5 +28,10 @@ public interface IGameModel {
     void setMemento(Object memento);
 
     void undoLastCmd();
+
+    AbsCannon getCannon();
+    int getScore();
+    int getMissilesCount();
+    int getEnemiesCount();
 
 }

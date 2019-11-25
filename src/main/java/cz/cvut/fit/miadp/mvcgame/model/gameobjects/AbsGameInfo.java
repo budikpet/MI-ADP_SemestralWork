@@ -1,10 +1,16 @@
 package cz.cvut.fit.miadp.mvcgame.model.gameobjects;
 
+import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.GameObject;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
-public abstract class AbsModelInfo extends GameObject {
+public abstract class AbsGameInfo extends GameObject {
+    protected IGameModel model;
     public abstract String getText();
+
+    public AbsGameInfo(IGameModel model) {
+        this.model = model;
+    }
 
     public void accept(IVisitor visitor) {
         visitor.visitGameInfo(this);
