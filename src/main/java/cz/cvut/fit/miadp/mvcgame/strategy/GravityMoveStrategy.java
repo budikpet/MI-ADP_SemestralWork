@@ -10,8 +10,11 @@ public class GravityMoveStrategy implements IMovingStrategy {
 
     @Override
     public void updatePosition(AbsMissile mis) {
-        double newX = mis.getStartPos().getX() + ( mis.getAge() * (mis.getInitPower() - mis.getAge() * 0.00007f) * Math.cos(mis.getInitAngle()));
-        double newY = mis.getStartPos().getY() + ( mis.getAge() * mis.getInitPower() * Math.sin(mis.getInitAngle())) + Math.pow(mis.getAge(), 2) * MvcGameConfig.INIT_GRAVITY;
+        double startX = mis.getStartPos().getX() + mis.getOffsetX();
+        double startY = mis.getStartPos().getY() + mis.getOffsetY();
+        
+        double newX = startX + ( mis.getAge() * (mis.getInitPower() - mis.getAge() * 0.00002f) * Math.cos(mis.getInitAngle()));
+        double newY = startY + ( mis.getAge() * mis.getInitPower() * Math.sin(mis.getInitAngle())) + Math.pow(mis.getAge(), 2) * MvcGameConfig.INIT_GRAVITY;
         
         mis.setX((int)(newX));
         mis.setY((int)(newY));

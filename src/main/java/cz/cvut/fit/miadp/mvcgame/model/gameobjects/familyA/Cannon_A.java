@@ -31,6 +31,7 @@ public class Cannon_A extends AbsCannon {
 		this.DOUBLE_SHOOTING_MODE = new DoubleShootingMode();
 
 		this.setSingleShootingMode();
+		this.setDoubleShootingMode();
 	}
 
 	public void aimUp() {

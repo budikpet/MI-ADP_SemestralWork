@@ -8,6 +8,8 @@ public abstract class AbsMissile extends TimelifeAwareGameObject {
     protected Position startPos;
     protected double initPower;
     protected double initAngle;
+    protected double offsetX;
+    protected double offsetY;
 
     public AbsMissile(Position startPos, double initPower, double initAngle) {
         this.startPos = startPos;
@@ -15,6 +17,9 @@ public abstract class AbsMissile extends TimelifeAwareGameObject {
         this.initAngle = initAngle;
         this.setX(startPos.getX());
         this.setY(startPos.getY());
+
+        this.offsetX = 0;
+        this.offsetY = 0;
     }
     
     public void accept(IVisitor visitor) {
@@ -37,5 +42,21 @@ public abstract class AbsMissile extends TimelifeAwareGameObject {
 
     public double getInitPower() {
         return initPower;
+    }
+
+    public void setOffsetX(double offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public double getOffsetX() {
+        return offsetX;
+    }
+
+    public void setOffsetY(double offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    public double getOffsetY() {
+        return offsetY;
     }
 }

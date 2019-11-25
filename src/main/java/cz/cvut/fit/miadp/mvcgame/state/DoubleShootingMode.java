@@ -8,12 +8,15 @@ public class DoubleShootingMode implements IShootingMode {
 
     @Override
     public void shoot(AbsCannon cannon) {
-        AbsMissile m;
-        m = cannon.primitiveShoot();
-        m.move(0, MvcGameConfig.MOVE_STEP);
+        for(int i = 0; i < 2; i++) {
+            AbsMissile missile = cannon.primitiveShoot();
+            missile.setOffsetY(-3 * i * MvcGameConfig.MOVE_STEP);
+        }
 
-        m = cannon.primitiveShoot();
-        m.move(0, -1 * MvcGameConfig.MOVE_STEP);
+        
+        // missile.move(0, MvcGameConfig.MOVE_STEP);
+
+        // missile.move(0, -1 * MvcGameConfig.MOVE_STEP);
     }
 
     @Override
