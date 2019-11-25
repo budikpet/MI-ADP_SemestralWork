@@ -1,17 +1,25 @@
-### .vscode/launch.json ###
+# MI-ADP Semestral work
+
+A little shooter game, uses software patterns:
+- MVC
+- Strategy
+- Bridge
+- Proxy
+- State
+- Visitor
+- Observer
+- Command
+- Memento
+- Abstract factory
+- Singleton
+
+Keyboard controls:
 
 ```
-{
-    "configurations": [
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - MvcGameJavaFxLauncher",
-            "request": "launch",
-            "mainClass": "cz.cvut.fit.miadp.MvcGameJavaFxLauncher",
-            // TODO: fix these vmArgs paths to point to your Maven repository
-            "vmArgs": "--module-path /Users/Petr/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;/Users/Petr/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;/Users/Petr/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar;/Users/Petr/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;/Users/Petr/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;/Users/Petr/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar --add-modules  javafx.base,javafx.controls,javafx.graphics -classpath /Users/Petr/Repos/miadp-mvcgame-b191/target/classes",
-            "projectName": "mvcgame"
-        }
-    ]
-}
+W/S: Move cannon Up/Down 
+SPACE: Shoot cannon
+M: Change shooting mode
+UP/DOWN: Aim cannon Up/Down
+LEFT/RIGHT: Decrease/Increase force of the cannon shot
+U: Undo last command (hold for undoing multiple)
 ```
