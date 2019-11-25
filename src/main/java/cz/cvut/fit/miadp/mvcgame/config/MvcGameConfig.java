@@ -19,4 +19,7 @@ public class MvcGameConfig {
     public static final int MOVE_STEP = 10;
     public static final double POWER_STEP = 1.0;
     public static final double ANGLE_STEP = 0.1;
+
+    public static final int PIXELS_NEEDED_TO_COLLIDE = 20;
+    public static final long MAX_COLLISION_TIME_MS = 1000;
 }

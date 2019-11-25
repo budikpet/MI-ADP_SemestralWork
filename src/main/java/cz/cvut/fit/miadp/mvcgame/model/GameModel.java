@@ -54,31 +54,59 @@ public class GameModel implements IGameModel, IObservable {
         this.collisions = new ArrayList<AbsCollision>();
 
         // Randomly create enemies
-        
-        for(int i = 0; i < MvcGameConfig.NUM_OF_ENEMIES; i++) {
+
+        for (int i = 0; i < MvcGameConfig.NUM_OF_ENEMIES; i++) {
             this.enemies.add(this.goFact.createEnemy());
         }
     }
 
     public void timeTick() {
-
         this.executeCmds();
-
         this.moveMissiles();
+        this.handleCollisions();
 
         // this.destroyInvisibleGO();
     }
 
-    public List<GameObject> getGameObjects() {
-        List<GameObject> go = new ArrayList<GameObject>();
+    private void handleCollisions() {
+        ArrayList<AbsMissile> deletedMissiles = new ArrayList<>();
+        ArrayList<AbsEnemy> deletedEnemies = new ArrayList<>();
+        ArrayList<AbsCollision> deletedCollisions = new ArrayList<>();
 
-        go.addAll(this.missiles);
-        go.addAll(this.enemies);
-        go.addAll(this.collisions);
-        go.add(this.cannon);
-        go.add(this.gameInfo);
+        // Create new collisions
+        for (AbsEnemy currEnemy : this.enemies) {
+            for (AbsMissile currMissile : this.missiles) {
+                if (currMissile.collidesWith(currEnemy)) {
+                    this.score++;
+                    collisions.add(goFact.createCollision(currEnemy.getPosition()));
 
-        return go;
+                    // Mark missile and enemy for removal
+                    deletedMissiles.add(currMissile);
+                    deletedEnemies.add(currEnemy);
+                }
+            }
+        }
+
+        // Get all old collisions
+        for (AbsCollision c : this.collisions) {
+            if (c.getAge() > MvcGameConfig.MAX_COLLISION_TIME_MS) {
+                deletedCollisions.add(c);
+            }
+        }
+
+        // Remove old collisions, enemies and missiles
+        for (AbsCollision c : deletedCollisions) {
+            this.collisions.remove(c);
+        }
+
+        for (AbsEnemy e : deletedEnemies) {
+            this.enemies.remove(e);
+        }
+
+        for (AbsMissile m : deletedMissiles) {
+            this.missiles.remove(m);
+        }
+
     }
 
     // ================================================================================
@@ -107,7 +135,7 @@ public class GameModel implements IGameModel, IObservable {
 
     public void cannonShoot() {
         long time = System.currentTimeMillis();
-        if(time >= this.last_shot) {
+        if (time >= this.last_shot) {
             this.missiles.addAll(this.cannon.shoot());
             this.last_shot = time + MvcGameConfig.RELOAD_MS;
             this.notifyMyObs();
@@ -215,6 +243,18 @@ public class GameModel implements IGameModel, IObservable {
     // ================================================================================
     // Getters/Setters
     // ================================================================================
+
+    public List<GameObject> getGameObjects() {
+        List<GameObject> go = new ArrayList<GameObject>();
+
+        go.addAll(this.missiles);
+        go.addAll(this.enemies);
+        go.addAll(this.collisions);
+        go.add(this.cannon);
+        go.add(this.gameInfo);
+
+        return go;
+    }
 
     public int getScore() {
         return this.score;

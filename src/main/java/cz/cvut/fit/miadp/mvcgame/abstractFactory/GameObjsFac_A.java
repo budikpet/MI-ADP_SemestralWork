@@ -5,6 +5,7 @@ import java.util.Random;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
+import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
@@ -31,8 +32,8 @@ public class GameObjsFac_A implements IGameObjsFac {
     }
 
     @Override
-    public AbsCollision createCollision() {
-        return new Collision_A();
+    public AbsCollision createCollision(Position pos) {
+        return new Collision_A(pos);
     }
 
     @Override

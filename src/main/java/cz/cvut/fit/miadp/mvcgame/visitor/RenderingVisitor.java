@@ -60,7 +60,7 @@ public class RenderingVisitor implements IVisitor {
 
     @Override
     public void visitCollision(AbsCollision go) {
-        // TODO Auto-generated method stub
+        this.gr.drawImage("images/collision.png", go.getPosition());
     }
 
     public static RenderingVisitor getInstance() {

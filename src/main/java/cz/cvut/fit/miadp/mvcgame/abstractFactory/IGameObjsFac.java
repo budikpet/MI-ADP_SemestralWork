@@ -1,6 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
+import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
@@ -13,7 +14,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 public interface IGameObjsFac {
     AbsCannon createCannon();
 
-    AbsCollision createCollision();
+    AbsCollision createCollision(Position pos);
 
     AbsEnemy createEnemy();
 
