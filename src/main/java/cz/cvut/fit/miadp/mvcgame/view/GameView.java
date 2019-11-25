@@ -23,7 +23,7 @@ public class GameView implements IObserver {
 
         this.model.registerObserver(this);
 
-        this.renderingVisitor = new RenderingVisitor();
+        this.renderingVisitor = RenderingVisitor.getInstance();
     }
 
     public void setGraphics(IGameGraphics gr) {

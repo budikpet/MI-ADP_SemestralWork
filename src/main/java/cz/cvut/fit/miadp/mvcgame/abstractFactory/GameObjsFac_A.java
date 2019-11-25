@@ -1,11 +1,20 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
-import cz.cvut.fit.miadp.mvcgame.model.Position;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.*;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.*;
+import java.util.Random;
+
+import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Cannon_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Collision_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Enemy_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Missile_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.ModelInfo_A;
 import cz.cvut.fit.miadp.mvcgame.strategy.GravityMoveStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMoveStrategy;
 
 /**
  * Concrete implementation of AbstractFactory.
@@ -26,7 +35,16 @@ public class GameObjsFac_A implements IGameObjsFac {
 
     @Override
     public AbsEnemy createEnemy() {
-        return new Enemy_A();
+        AbsEnemy enemy = new Enemy_A();
+        enemy.setX(nextInt(MvcGameConfig.MAX_X - 30));
+        enemy.setY(nextInt(MvcGameConfig.MAX_X - 30));
+        
+        return enemy;
+    }
+
+    private int nextInt(int maxValue) {
+        Random rand = new Random();
+        return rand.nextInt(MvcGameConfig.MAX_X - 30) + 30;
     }
 
     @Override

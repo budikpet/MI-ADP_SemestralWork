@@ -11,11 +11,9 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsModelInfo;
  * Visitor which renderes game objects on the screen.
  */
 public class RenderingVisitor implements IVisitor {
-
     private IGameGraphics gr;
 
-    public RenderingVisitor() {
-    }
+    private RenderingVisitor() {}
 
     public void setGraphics(IGameGraphics gr) {
         this.gr = gr;
@@ -35,8 +33,10 @@ public class RenderingVisitor implements IVisitor {
 
     @Override
     public void visitEnemy(AbsEnemy go) {
-        // TODO Auto-generated method stub
+        if (this.gr == null)
+            return;
 
+        this.gr.drawImage("images/enemy1.png", go.getPosition());
     }
 
     @Override
@@ -56,6 +56,10 @@ public class RenderingVisitor implements IVisitor {
     @Override
     public void visitCollision(AbsCollision go) {
         // TODO Auto-generated method stub
+    }
+
+    public static RenderingVisitor getInstance() {
+        return new RenderingVisitor();
     }
 
 }
