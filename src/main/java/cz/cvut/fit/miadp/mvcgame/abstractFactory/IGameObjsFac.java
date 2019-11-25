@@ -1,5 +1,6 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
+import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.*;
 
 /**
@@ -12,7 +13,7 @@ public interface IGameObjsFac {
 
     AbsEnemy createEnemy();
 
-    AbsMissile createMissile();
+    AbsMissile createMissile(Position pos);
 
     AbsModelInfo createModelInfo();
 }

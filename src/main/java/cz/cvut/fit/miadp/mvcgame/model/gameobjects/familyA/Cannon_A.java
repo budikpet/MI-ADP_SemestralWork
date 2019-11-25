@@ -5,6 +5,7 @@ import java.util.List;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjsFac;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.state.DoubleShootingMode;
@@ -22,6 +23,7 @@ public class Cannon_A extends AbsCannon {
 	private List<AbsMissile> shootBatch;
 
 	public Cannon_A(IGameObjsFac goFact) {
+		super(MvcGameConfig.INIT_ANGLE, MvcGameConfig.INIT_POWER);
 		this.setX(MvcGameConfig.CANNON_INIT_X);
 		this.setY((int) (MvcGameConfig.MAX_Y / 2));
 		this.goFact = goFact;
@@ -32,36 +34,20 @@ public class Cannon_A extends AbsCannon {
 		this.setSingleShootingMode();
 	}
 
-	public Float getVelocity() {
-		return null;
-	}
-
-	public Float getAngle() {
-		return null;
-	}
-
-	public void setVelocity(Float velocity) {
-
-	}
-
-	public void setAngle(Float angle) {
-
-	}
-
 	public void aimUp() {
-		
+		this.angle += MvcGameConfig.ANGLE_STEP;
 	}
 
 	public void aimDown() {
-
+		this.angle -= MvcGameConfig.ANGLE_STEP;
 	}
 
 	public void incPower() {
-
+		this.power += MvcGameConfig.POWER_STEP;
 	}
 
 	public void decPower() {
-
+		this.power -= MvcGameConfig.POWER_STEP;
 	}
 
 	@Override
@@ -85,9 +71,8 @@ public class Cannon_A extends AbsCannon {
 	}
 
 	public AbsMissile primitiveShoot() {
-		AbsMissile m = this.goFact.createMissile();
-		m.setX(this.getX());
-		m.setY(this.getY());
+		Position startPos = new Position(this.getX(), this.getY());
+		AbsMissile m = this.goFact.createMissile(startPos);
 
 		this.shootBatch.add(m);
 
@@ -96,15 +81,20 @@ public class Cannon_A extends AbsCannon {
 
 	@Override
 	public void toggleShootingMode() {
-
 		this.mode.toggle(this);
 	}
 
+	/**
+	 * Used for setting the mode from IShootingMode.
+	 */
 	@Override
 	public void setDoubleShootingMode() {
 		this.mode = this.DOUBLE_SHOOTING_MODE;
 	}
 
+	/**
+	 * Used for setting the mode from IShootingMode.
+	 */
 	@Override
 	public void setSingleShootingMode() {
 		this.mode = this.SINGLE_SHOOTING_MODE;

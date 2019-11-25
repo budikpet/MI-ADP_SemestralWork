@@ -1,7 +1,9 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
+import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.*;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.*;
+import cz.cvut.fit.miadp.mvcgame.strategy.GravityMoveStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMoveStrategy;
 
@@ -10,7 +12,7 @@ import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMoveStrategy;
  */
 public class GameObjsFac_A implements IGameObjsFac {
 
-    private IMovingStrategy activeMovingStrategy = new SimpleMoveStrategy();
+    private IMovingStrategy activeMovingStrategy = new GravityMoveStrategy();
 
     @Override
     public AbsCannon createCannon() {
@@ -28,8 +30,8 @@ public class GameObjsFac_A implements IGameObjsFac {
     }
 
     @Override
-    public AbsMissile createMissile() {
-        return new Missile_A(this.activeMovingStrategy);
+    public AbsMissile createMissile(Position pos) {
+        return new Missile_A(pos, this.activeMovingStrategy);
     }
 
     @Override
