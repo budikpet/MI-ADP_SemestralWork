@@ -49,7 +49,7 @@ public class GameController {
         case "RIGHT":
             this.model.registerCommand(new IncPowerCommand(this.model));
             break;
-        case "Z":
+        case "U":
             this.model.registerCommand(new UndoLastCommand(this.model));
             break;
         default:

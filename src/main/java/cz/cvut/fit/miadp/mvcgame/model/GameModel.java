@@ -207,27 +207,38 @@ public class GameModel implements IGameModel, IObservable {
             AbsCommand cmd = this.unexecutedCmds.poll();
             cmd.doExecute();
 
-            this.executedCmds.push(cmd);
+            if(cmd.isRewindable()) {
+                this.executedCmds.push(cmd);
+            }
         }
     }
 
     private class Memento {
-        private int score;
+        public int score;
+        public ArrayList<AbsEnemy> enemies;
+        public ArrayList<AbsMissile> missiles;
+        public ArrayList<AbsCollision> collisions;
+        public int cannonY;
     }
 
     public Object createMemento() {
-        Memento m = new Memento();
-        m.score = this.score;
-        // store positions of Missiles,...
-
-        return m;
+        Memento memento =  new Memento();
+        memento.score = this.score;
+        memento.enemies = new ArrayList<AbsEnemy>(this.enemies);
+        memento.missiles = new ArrayList<AbsMissile>(this.missiles);
+        memento.collisions = new ArrayList<AbsCollision>(this.collisions);
+        memento.cannonY = this.cannon.getY();
+        return memento;
     }
 
     public void setMemento(Object memento) {
-        Memento m = (Memento) memento;
+        Memento m = (Memento)memento;
         this.score = m.score;
-        // restore positions of Missiles,...
-
+        this.enemies = m.enemies;
+        this.missiles = m.missiles;
+        this.collisions = m.collisions;
+        this.cannon.setY(m.cannonY);
+        this.notifyMyObs();
     }
 
     public void undoLastCmd() {

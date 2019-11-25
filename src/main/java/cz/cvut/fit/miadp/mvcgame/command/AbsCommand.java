@@ -8,9 +8,11 @@ import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 public abstract class AbsCommand {
     private Object memento;
     protected IGameModel receiver;
+    protected boolean isRewindable;
 
     public AbsCommand(IGameModel rec) {
         this.receiver = rec;
+        this.isRewindable = true;
     }
 
     public void doExecute() {
@@ -23,5 +25,9 @@ public abstract class AbsCommand {
 
     public void unexecute() {
         this.receiver.setMemento(this.memento);
+    }
+
+    public boolean isRewindable() {
+        return this.isRewindable;
     }
 }
