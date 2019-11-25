@@ -3,7 +3,6 @@ package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 import java.util.Random;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
@@ -16,15 +15,15 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Collision_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Enemy_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Missile_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.GameInfo_A;
-import cz.cvut.fit.miadp.mvcgame.strategy.GravityMoveStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.GravityMissileMoveStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.IMissileMovingStrategy;
 
 /**
  * Concrete implementation of AbstractFactory.
  */
 public class GameObjsFac_A implements IGameObjsFac {
 
-    private IMovingStrategy activeMovingStrategy = new GravityMoveStrategy();
+    private IMissileMovingStrategy activeMovingStrategy = new GravityMissileMoveStrategy();
 
     @Override
     public AbsCannon createCannon() {

@@ -5,7 +5,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 /**
  * Interface for missile movement strategies.
  */
-public interface IMovingStrategy {
+public interface IMissileMovingStrategy {
 
     void updatePosition(AbsMissile missile);
 

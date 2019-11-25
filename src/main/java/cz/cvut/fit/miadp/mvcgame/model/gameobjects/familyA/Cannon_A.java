@@ -7,10 +7,7 @@ import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjsFac;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
-import cz.cvut.fit.miadp.mvcgame.state.DoubleShootingMode;
-import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.miadp.mvcgame.state.ShootingModes;
-import cz.cvut.fit.miadp.mvcgame.state.SingleShootingMode;
 
 public class Cannon_A extends AbsCannon {
 	private IGameObjsFac goFact;
@@ -26,11 +23,11 @@ public class Cannon_A extends AbsCannon {
 	}
 
 	public void aimUp() {
-		this.angle += MvcGameConfig.ANGLE_STEP;
+		this.angle -= MvcGameConfig.ANGLE_STEP;
 	}
 
 	public void aimDown() {
-		this.angle -= MvcGameConfig.ANGLE_STEP;
+		this.angle += MvcGameConfig.ANGLE_STEP;
 	}
 
 	public void incPower() {

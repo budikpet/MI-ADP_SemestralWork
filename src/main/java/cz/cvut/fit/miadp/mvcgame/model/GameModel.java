@@ -64,7 +64,22 @@ public class GameModel implements IGameModel, IObservable {
         this.moveMissiles();
         this.handleCollisions();
 
-        // this.destroyInvisibleGO();
+        this.destroyInvisible();
+    }
+
+    private void destroyInvisible() {
+        ArrayList<AbsMissile> removed = new ArrayList<>();
+
+        for(AbsMissile currMissile : this.missiles) {
+            Position pos = currMissile.getPosition();
+            if(pos.isOutOfBounds()) {
+                removed.add(currMissile);
+            }
+        }
+
+        for(AbsMissile removedMissile : removed) {
+            this.missiles.remove(removedMissile);
+        }
     }
 
     private void generateEnemies() {

@@ -6,7 +6,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 /**
  * Base missile movement strategy.
  */
-public class SimpleMoveStrategy implements IMovingStrategy {
+public class SimpleMissileMoveStrategy implements IMissileMovingStrategy {
 
     @Override
     public void updatePosition(AbsMissile mis) {

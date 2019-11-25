@@ -1,6 +1,5 @@
 package cz.cvut.fit.miadp.mvcgame.state;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

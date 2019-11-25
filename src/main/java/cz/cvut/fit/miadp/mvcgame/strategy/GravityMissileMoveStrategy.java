@@ -6,7 +6,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 /**
  * Gravity missile movement strategy.
  */
-public class GravityMoveStrategy implements IMovingStrategy {
+public class GravityMissileMoveStrategy implements IMissileMovingStrategy {
 
     @Override
     public void updatePosition(AbsMissile mis) {
