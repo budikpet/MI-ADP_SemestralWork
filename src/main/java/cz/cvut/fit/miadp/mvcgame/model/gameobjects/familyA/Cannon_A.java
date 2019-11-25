@@ -60,6 +60,10 @@ public class Cannon_A extends AbsCannon {
 		this.move(0, MvcGameConfig.MOVE_STEP);
 	}
 
+	// ================================================================================
+    // Shooting
+    // ================================================================================
+
 	@Override
 	public List<AbsMissile> shoot() {
 
