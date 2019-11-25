@@ -1,5 +1,9 @@
 package cz.cvut.fit.miadp.mvcgame.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import cz.cvut.fit.miadp.mvcgame.command.AimDownCommand;
 import cz.cvut.fit.miadp.mvcgame.command.AimUpCommand;
 import cz.cvut.fit.miadp.mvcgame.command.CannonShootCommand;
@@ -9,6 +13,7 @@ import cz.cvut.fit.miadp.mvcgame.command.MoveCannonDownCommand;
 import cz.cvut.fit.miadp.mvcgame.command.MoveCannonUpCommand;
 import cz.cvut.fit.miadp.mvcgame.command.ToggleShootingModeCommand;
 import cz.cvut.fit.miadp.mvcgame.command.UndoLastCommand;
+import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 /**
@@ -18,12 +23,16 @@ import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
  */
 public class GameController {
     private IGameModel model;
+    private HashMap<String, Long> calledKeyTimes;
+    private HashSet<String> debouncedKeys;
 
     public GameController(IGameModel model) {
         this.model = model;
+        this.calledKeyTimes = new HashMap<>();
+        this.debouncedKeys = new HashSet<>(Arrays.asList("M", "LEFT", "RIGHT", "UP", "DOWN"));
     }
 
-    public void handleKeyCode(String keyCode) {
+    protected void handleKeyCode(String keyCode) {
         switch (keyCode) {
         case "W":
             this.model.registerCommand(new MoveCannonUpCommand(this.model));
@@ -57,4 +66,16 @@ public class GameController {
         }
     }
 
+    public void handleKeyCodeWithDebounce(String keyCode) {
+        if (debouncedKeys.contains(keyCode)) {
+            long currTime = System.currentTimeMillis();
+
+            if (!calledKeyTimes.containsKey(keyCode) || currTime - calledKeyTimes.get(keyCode) > MvcGameConfig.DEBOUNCE_MIN_INTERVAL_MS) {
+                calledKeyTimes.put(keyCode, currTime);
+                this.handleKeyCode(keyCode);
+            }
+        } else {
+            this.handleKeyCode(keyCode);
+        }
+    }
 }
