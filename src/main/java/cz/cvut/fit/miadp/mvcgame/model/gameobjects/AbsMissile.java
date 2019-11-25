@@ -1,6 +1,5 @@
 package cz.cvut.fit.miadp.mvcgame.model.gameobjects;
 
-import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.TimelifeAwareGameObject;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
@@ -10,11 +9,10 @@ public abstract class AbsMissile extends TimelifeAwareGameObject {
     protected double initPower;
     protected double initAngle;
 
-    public AbsMissile(Position startPos) {
+    public AbsMissile(Position startPos, double initPower, double initAngle) {
         this.startPos = startPos;
-        //TODO: Redo
-        this.initPower = MvcGameConfig.INIT_POWER / 20.0;
-        this.initAngle = MvcGameConfig.INIT_ANGLE;
+        this.initPower = initPower;
+        this.initAngle = initAngle;
         this.setX(startPos.getX());
         this.setY(startPos.getY());
     }

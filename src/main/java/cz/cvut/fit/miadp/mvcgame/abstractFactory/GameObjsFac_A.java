@@ -30,8 +30,11 @@ public class GameObjsFac_A implements IGameObjsFac {
     }
 
     @Override
-    public AbsMissile createMissile(Position pos) {
-        return new Missile_A(pos, this.activeMovingStrategy);
+    public AbsMissile createMissile(AbsCannon cannon) {
+        return new Missile_A(this.activeMovingStrategy, 
+            cannon.getPosition(),
+            cannon.getPower(),
+            cannon.getAngle());
     }
 
     @Override

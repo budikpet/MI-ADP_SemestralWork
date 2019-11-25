@@ -13,7 +13,7 @@ public interface IGameObjsFac {
 
     AbsEnemy createEnemy();
 
-    AbsMissile createMissile(Position pos);
+    AbsMissile createMissile(AbsCannon cannon);
 
     AbsModelInfo createModelInfo();
 }

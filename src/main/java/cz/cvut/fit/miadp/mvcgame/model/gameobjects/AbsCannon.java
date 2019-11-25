@@ -2,15 +2,14 @@ package cz.cvut.fit.miadp.mvcgame.model.gameobjects;
 
 import java.util.List;
 
-import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.GameObject;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
 public abstract class AbsCannon extends GameObject {
 	protected double angle;
-	protected int power;
+	protected double power;
 
-	public AbsCannon(double angle, int power) {
+	public AbsCannon(double angle, double power) {
 		this.power = power;
         this.angle = angle;
 	}
@@ -35,7 +34,7 @@ public abstract class AbsCannon extends GameObject {
         visitor.visitCannon(this);
 	}
 
-	public int getPower() {
+	public double getPower() {
 		return this.power;
 	}
 

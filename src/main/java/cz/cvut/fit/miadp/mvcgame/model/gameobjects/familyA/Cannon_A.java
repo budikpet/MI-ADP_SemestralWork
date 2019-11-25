@@ -5,7 +5,6 @@ import java.util.List;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjsFac;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.state.DoubleShootingMode;
@@ -71,8 +70,7 @@ public class Cannon_A extends AbsCannon {
 	}
 
 	public AbsMissile primitiveShoot() {
-		Position startPos = new Position(this.getX(), this.getY());
-		AbsMissile m = this.goFact.createMissile(startPos);
+		AbsMissile m = this.goFact.createMissile(this);
 
 		this.shootBatch.add(m);
 
