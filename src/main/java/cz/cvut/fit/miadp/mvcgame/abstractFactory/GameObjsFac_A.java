@@ -1,5 +1,6 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
+import java.util.List;
 import java.util.Random;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
@@ -15,6 +16,8 @@ import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Collision_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Enemy_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.GameInfo_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Missile_A;
+import cz.cvut.fit.miadp.mvcgame.strategy.enemy.EnemyMovementStrategies;
+import cz.cvut.fit.miadp.mvcgame.strategy.enemy.IEnemyMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.missile.GravityMissileMoveStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.missile.IMissileMovingStrategy;
 
@@ -37,11 +40,19 @@ public class GameObjsFac_A implements IGameObjsFac {
 
     @Override
     public AbsEnemy createEnemy() {
-        final AbsEnemy enemy = new Enemy_A();
+        final AbsEnemy enemy = new Enemy_A(getRandomStrategy());
         enemy.setX(nextInt(MvcGameConfig.MAX_X - 30));
         enemy.setY(nextInt(MvcGameConfig.MAX_X - 30));
         
         return enemy;
+    }
+
+    private IEnemyMovingStrategy getRandomStrategy() {
+        Random rand = new Random();
+        List<EnemyMovementStrategies> strategies = EnemyMovementStrategies.getValues();
+        int index = rand.nextInt(strategies.size());
+
+        return strategies.get(index).getStrategy();
     }
 
     private int nextInt(final int maxValue) {

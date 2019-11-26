@@ -61,6 +61,7 @@ public class GameModel implements IGameModel, IObservable {
     public void timeTick() {
         this.generateEnemies();
         this.executeCmds();
+        this.moveEnemies();
         this.moveMissiles();
         this.handleCollisions();
 
@@ -152,6 +153,14 @@ public class GameModel implements IGameModel, IObservable {
     public void moveMissiles() {
         for (AbsMissile m : this.missiles) {
             m.move();
+        }
+
+        this.notifyMyObs();
+    }
+
+    public void moveEnemies() {
+        for (AbsEnemy currEnemy : this.enemies) {
+            currEnemy.move();
         }
 
         this.notifyMyObs();

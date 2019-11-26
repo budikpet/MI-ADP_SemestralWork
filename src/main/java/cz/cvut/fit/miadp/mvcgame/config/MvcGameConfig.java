@@ -11,7 +11,7 @@ public class MvcGameConfig {
     public static final int INFO_Y = 20;
     public static final int CANNON_INIT_X = 10;
     public static final long RELOAD_MS = 500;
-    public static final int NUM_OF_ENEMIES = 20;
+    public static final int NUM_OF_ENEMIES = 10;
     public static final long DEBOUNCE_MIN_INTERVAL_MS = 250;
 
     public static final double INIT_POWER = 10;
