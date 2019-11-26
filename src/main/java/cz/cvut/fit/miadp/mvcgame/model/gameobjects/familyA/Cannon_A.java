@@ -19,7 +19,7 @@ public class Cannon_A extends AbsCannon {
 		this.setY((int) (MvcGameConfig.MAX_Y / 2));
 		this.goFact = goFact;
 
-		this.mode = ShootingModes.SINGLE_SHOOT;
+		this.mode = ShootingModes.DOUBLE_SHOOT;
 	}
 
 	public void aimUp() {
