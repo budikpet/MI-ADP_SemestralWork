@@ -1,4 +1,4 @@
-package cz.cvut.fit.miadp.mvcgame.strategy;
+package cz.cvut.fit.miadp.mvcgame.strategy.missile;
 
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 

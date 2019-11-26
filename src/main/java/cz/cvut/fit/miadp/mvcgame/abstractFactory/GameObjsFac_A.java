@@ -8,22 +8,22 @@ import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsCollision;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsEnemy;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsGameInfo;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Cannon_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Collision_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Enemy_A;
-import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Missile_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.GameInfo_A;
-import cz.cvut.fit.miadp.mvcgame.strategy.GravityMissileMoveStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.IMissileMovingStrategy;
+import cz.cvut.fit.miadp.mvcgame.model.gameobjects.familyA.Missile_A;
+import cz.cvut.fit.miadp.mvcgame.strategy.missile.GravityMissileMoveStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.missile.IMissileMovingStrategy;
 
 /**
  * Concrete implementation of AbstractFactory.
  */
 public class GameObjsFac_A implements IGameObjsFac {
 
-    private IMissileMovingStrategy activeMovingStrategy = new GravityMissileMoveStrategy();
+    private final IMissileMovingStrategy activeMovingStrategy = new GravityMissileMoveStrategy();
 
     @Override
     public AbsCannon createCannon() {
@@ -31,26 +31,26 @@ public class GameObjsFac_A implements IGameObjsFac {
     }
 
     @Override
-    public AbsCollision createCollision(Position pos) {
+    public AbsCollision createCollision(final Position pos) {
         return new Collision_A(pos);
     }
 
     @Override
     public AbsEnemy createEnemy() {
-        AbsEnemy enemy = new Enemy_A();
+        final AbsEnemy enemy = new Enemy_A();
         enemy.setX(nextInt(MvcGameConfig.MAX_X - 30));
         enemy.setY(nextInt(MvcGameConfig.MAX_X - 30));
         
         return enemy;
     }
 
-    private int nextInt(int maxValue) {
-        Random rand = new Random();
+    private int nextInt(final int maxValue) {
+        final Random rand = new Random();
         return rand.nextInt(MvcGameConfig.MAX_X - 30) + 30;
     }
 
     @Override
-    public AbsMissile createMissile(AbsCannon cannon) {
+    public AbsMissile createMissile(final AbsCannon cannon) {
         return new Missile_A(this.activeMovingStrategy, 
             cannon.getPosition(),
             cannon.getPower(),
@@ -58,7 +58,7 @@ public class GameObjsFac_A implements IGameObjsFac {
     }
 
     @Override
-    public AbsGameInfo createGameInfo(IGameModel model) {
+    public AbsGameInfo createGameInfo(final IGameModel model) {
         return new GameInfo_A(model);
     }
 
